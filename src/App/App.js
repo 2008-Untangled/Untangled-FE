@@ -1,13 +1,15 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import HomePage from '../HomePage/HomePage'
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>I love turtles</Text>
-      <StatusBar style='auto' />
-    </View>
+    <HomePage />
+    // <View style={styles.container}>
+    //   <Text style={styles.text}>Welcome Home!</Text>
+    //   <StatusBar style='auto' />
+    // </View>
   );
 }
 
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   text: {
     // flex: 2,
     // backgroundColor: "black",
-    fontSize: 200,
+    fontSize: 60,
     fontWeight: "bold",
     alignItems: "center",
     justifyContent: "center",
