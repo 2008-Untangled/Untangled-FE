@@ -8,8 +8,8 @@
 //   }
 
 import React from "react";
-
 import { StyleSheet, Text, View } from "react-native";
+import { Divider } from "react-native-paper";
 
 const Memory = (props) => {
   const { id } = props.id;
@@ -20,11 +20,19 @@ const Memory = (props) => {
   const { aromas } = props.aromas;
 
   return (
-    <View>
+    <View id={id} location={location} style={styles.container}>
       <Image source={require(`${image}`)}></Image>
-      <Text> </Text>
+      <Text> {description} </Text>
+      <Text>{aromas}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
 export default Memory;
