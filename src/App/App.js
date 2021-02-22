@@ -1,13 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+import "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import * as React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+// import { Button } from "react-native-paper";
+
+export default function App({ navigation }) {
   return (
     <NavigationContainer>
     <View style={styles.container}>
-      <Text style={styles.text}>I love turtles</Text>
+      <Text style={styles.text}>This will be overview</Text>
+      <Button
+      title="Go to Room"
+      onPress={() =>
+      navigation.navigate("Room", {name: "Room"})}>
+      </Button>
       <StatusBar style='auto' />
     </View>
     </NavigationContainer>
@@ -24,11 +32,14 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    // flex: 2,
-    // backgroundColor: "black",
     fontSize: 200,
     fontWeight: "bold",
     alignItems: "center",
     justifyContent: "center",
   },
 });
+
+const RoomView = ({ navigation }) => {
+  return <View style={styles.container}><Room /></View>
+
+}
