@@ -4,11 +4,13 @@ import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-// import { Button } from "react-native-paper";
+import HomePage from '../HomePage/HomePage'
 
 export default function App({ navigation }) {
   return (
+
     <NavigationContainer>
+     <HomePage />
     <View style={styles.container}>
       <Text style={styles.text}>This will be overview</Text>
       <Button
@@ -19,6 +21,7 @@ export default function App({ navigation }) {
       <StatusBar style='auto' />
     </View>
     </NavigationContainer>
+
   );
 }
 
