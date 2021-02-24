@@ -18,7 +18,7 @@ export default Overview;
 
 const styles = StyleSheet.create({
   container: {
-    display: "grid",
+    display: "flex",
     // grid not supported for react native so....
   },
 });
