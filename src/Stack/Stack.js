@@ -1,22 +1,19 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import App from '../App/App';
-import Room from ''
+// import * as React from "react";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createStackNavigator } from "@react-navigation/stack";
+// import HomePage from "../HomePage/HomePage";
+// import Overview from "../Overview/Overview";
 
-const Stack = createStackNavigator();
+// export const Stack = createStackNavigator();
 
-const MyStack = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Room"
-                    component={App}
-                    options={{ title: 'Living Room' }}
-                />
-                <Stack.Screen name="HomePage" component={HomePage} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-};
+// export const MyStack = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         {/* <Stack.Screen name='App' component={App} /> */}
+//         <Stack.Screen name="HomePage" component={HomePage} />
+//         <Stack.Screen name="Overview" component={Overview} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };

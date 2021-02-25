@@ -1,24 +1,38 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native-paper";
 
-const Overview = (props) => {
-  let rooms = props.map((room) => {
-    return (
-      // Some shit to do with room
-      <View>
-        <Text>LIVING ROOM</Text>
-      </View>
-    );
-  });
+export default Overview = (props) => {
+  console.log(props.route.params.rooms);
+  // let rooms = props.map((room) => {
+  //   return (
+  //     // Some shit to do with room
+  //     <View>
+  //       <Text>LIVING ROOM</Text>
+  //     </View>
+  //   );
+  // });
+  const buttonPress = () => {
+    props.navigation.navigate("Room");
+  };
 
-  return <View style={styles.container}>{rooms}</View>;
+  return (
+    <View style={styles.container}>
+      <Text>OVERVIEW</Text>
+      <Button
+        onPress={() => {
+          buttonPress();
+        }}
+      >
+        To Room
+      </Button>
+    </View>
+  );
 };
-
-export default Overview;
 
 const styles = StyleSheet.create({
   container: {
-    display: "grid",
+    display: "flex",
     // grid not supported for react native so....
   },
 });

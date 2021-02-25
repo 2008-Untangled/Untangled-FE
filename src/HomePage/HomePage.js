@@ -1,29 +1,39 @@
-import React from 'react';
-import { View, Image } from 'react-native';
-import { Button } from "react-native-paper";
-import { getAllRooms } from '../../apiCalls';
-import Overview from '../Overview/Overview'
+import React, { Component } from "react";
+import { View, Image, TouchableOpacity } from "react-native";
+import { getAllRooms } from "../apiCalls";
 
-const HomePage = () => {
-  const handlePress = () => {
-
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rooms: [],
+    };
   }
-  return (
-    <View 
-      onPress={}
-    >
-      <Image 
-        source={require('')}
-      />
-      <Overview 
-        allRooms={}
-      />
-    </View>
-  ) 
+  resolvedRooms = async () => {
+    await getAllRooms(1)
+      .then((data) => this.setState({ rooms: data.data }))
+      .then((response) =>
+        this.props.navigation.navigate("Overview", { rooms: this.state.rooms })
+      )
+      .catch((error) => console.error(error));
+  };
+
+  render() {
+    return (
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            this.resolvedRooms();
+          }}
+        >
+          <Image
+            source={require("../../assets/backdrops/homefront.png")}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    
-  },
-}
+export default HomePage;
