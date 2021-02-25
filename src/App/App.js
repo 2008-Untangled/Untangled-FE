@@ -1,6 +1,5 @@
 import "react-native-gesture-handler";
 import * as React from "react";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "../HomePage/HomePage";
@@ -26,20 +25,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    fontWeight: "bold",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  text: {
-    fontSize: 60,
-    fontWeight: "bold",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
