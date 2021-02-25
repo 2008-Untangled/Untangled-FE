@@ -1,22 +1,17 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Navigator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { HomePage } from "../HomePage/HomePage";
 import Button from "../UI/Button";
+import { MyStack, Stack } from "../Stack/Stack";
 
 export default function App({ navigation }) {
   return (
     <NavigationContainer>
       <HomePage />
       <View style={styles.container}>
-        <Text style={styles.text}>This will be overview</Text>
-        <Button
-          title='Go to Room'
-          onPress={() =>
-            navigation.navigate("Room", { name: "Room" })
-          }></Button>
         <StatusBar style='auto' />
       </View>
     </NavigationContainer>
