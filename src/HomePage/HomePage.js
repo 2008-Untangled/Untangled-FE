@@ -1,45 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { Button } from "react-native-paper";
+import React, { Component } from "react";
+import { View, Image, TouchableOpacity } from "react-native";
 import { getAllRooms } from "../apiCalls";
-import Overview from "../Overview/Overview";
 
-export const HomePage = ({ navigation }) => {
-  const [allRooms, setAllRooms] = useState([]);
 
-  useEffect(() => {
-    console.log("This fucking works");
-  }, [allRooms]);
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.buttonPress = this.buttonPress.bind(this);
+  }
 
-  const resolveGetAllRooms = async () => {
-    await getAllRooms(1)
+  buttonPress() {
+    getAllRooms(1)
       .then((data) => setAllRooms(data.data))
       .catch((error) => console.error(error));
-  };
+    this.props.navigation.navigate('Overview');
+  }
 
-  const handlePress = () => {
-    // debugger;
-    console.log(navigation);
-    console.log("hello");
-    resolveGetAllRooms();
-    // console.log(allRooms);
-    // <Overview rooms={allRooms} />;
-  };
+  render() {
+    return(
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            this.buttonPress()
+          }}>
+          <Image source={require("../../assets/backdrops/homefront.png")} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
 
-  return (
-    <View>
-      <TouchableOpacity
-        onPress={() => {
-          // <Overview rooms={allRooms} />;
-          handlePress();
-          navigation.navigate("Overview", { name: "Overview" });
-        }}>
-        <Image source={require("../../assets/backdrops/homefront.png")} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {},
-});
+export default HomePage;

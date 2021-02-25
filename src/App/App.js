@@ -1,22 +1,31 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { StyleSheet, Text, View, Navigator } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { HomePage } from "../HomePage/HomePage";
-import Button from "../UI/Button";
-import { MyStack, Stack } from "../Stack/Stack";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomePage from "../HomePage/HomePage";
+import Overview from "../Overview/Overview";
+import Room from "../Room/Room";
+import Memory from "../Memory/Memory";
 
-export default function App({ navigation }) {
-  return (
-    <NavigationContainer>
-      <HomePage />
-      <View style={styles.container}>
-        <StatusBar style='auto' />
-      </View>
-    </NavigationContainer>
-  );
+export const Stack = createStackNavigator();
+
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomePage" component={HomePage} />
+          <Stack.Screen name="Overview" component={Overview} />
+          <Stack.Screen name="Room" component={Room} />
+          <Stack.Screen name="Memory" component={Memory} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -34,11 +43,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-const RoomView = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <Room />
-    </View>
-  );
-};
