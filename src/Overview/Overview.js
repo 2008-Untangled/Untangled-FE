@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
 
 export default Overview = (props) => {
+  console.log(props.route.params.rooms);
   // let rooms = props.map((room) => {
   //   return (
   //     // Some shit to do with room

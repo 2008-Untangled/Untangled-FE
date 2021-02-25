@@ -5,22 +5,25 @@ import { getAllRooms } from "../apiCalls";
 class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.buttonPress = this.buttonPress.bind(this);
+    this.state = {
+      rooms: [],
+    };
   }
-
-  buttonPress() {
-    getAllRooms(1)
-      .then((data) => setAllRooms(data.data))
+  resolvedRooms = async () => {
+    await getAllRooms(1)
+      .then((data) => this.setState({ rooms: data.data }))
+      .then((response) =>
+        this.props.navigation.navigate("Overview", { rooms: this.state.rooms })
+      )
       .catch((error) => console.error(error));
-    this.props.navigation.navigate("Overview");
-  }
+  };
 
   render() {
     return (
       <View>
         <TouchableOpacity
           onPress={() => {
-            this.buttonPress();
+            this.resolvedRooms();
           }}
         >
           <Image
