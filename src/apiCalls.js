@@ -3,7 +3,7 @@ export const getAllRooms = async (id) => {
   return await response.json();
 }
 export const getRoom = async (id) => {
-  const response = await fetch('https://untangled-be.herokuapp.com/api/v1')
+  const response = await fetch(`https://untangled-be.herokuapp.com/api/v1/rooms/${id}`)
   return await response.json();
 } 
 export const getUser = async (id) => {
