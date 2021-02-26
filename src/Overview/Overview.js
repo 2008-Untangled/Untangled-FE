@@ -1,38 +1,121 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default Overview = (props) => {
-  console.log(props.route.params.rooms);
-  // let rooms = props.map((room) => {
-  //   return (
-  //     // Some shit to do with room
-  //     <View>
-  //       <Text>LIVING ROOM</Text>
-  //     </View>
-  //   );
-  // });
-  const buttonPress = () => {
-    props.navigation.navigate("Room");
+export default Overview = ({ navigation, route }) => {
+  let kitchen = route.params.rooms[0];
+  let livingRoom = route.params.rooms[1];
+  let backyard = route.params.rooms[2];
+  let bedroom = route.params.rooms[3];
+
+  const routeToRoom = (id) => {
+    navigation.navigate("Room", { id: id });
   };
 
   return (
     <View style={styles.container}>
-      <Text>OVERVIEW</Text>
-      <Button
+      <TouchableOpacity
         onPress={() => {
-          buttonPress();
+          routeToRoom(kitchen.id);
         }}
       >
-        To Room
-      </Button>
+        <View style={styles.kitchen}>
+          <Text style={styles.textKitchen}>{kitchen.name}</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.stack}>
+        <TouchableOpacity
+          onPress={() => {
+            routeToRoom(livingRoom.id);
+          }}
+        >
+          <View style={styles.livingRoom}>
+            <Text style={styles.text}>{livingRoom.name}</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            routeToRoom(bedroom.id);
+          }}
+        >
+          <View style={styles.bedroom}>
+            <Text style={styles.text}>{bedroom.name}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          routeToRoom(backyard.id);
+        }}
+      >
+        <View style={styles.backyard}>
+          <Text style={styles.text}>{backyard.name}</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    // grid not supported for react native so....
+    backgroundColor: "white",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "center",
+    flexWrap: "wrap",
+  },
+  stack: {
+    padding: 0,
+    margin: 0,
+  },
+  text: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 28,
+    marginTop: 135,
+  },
+  textKitchen: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 28,
+    marginTop: 280,
+  },
+  kitchen: {
+    borderRadius: 10,
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "white",
+    backgroundColor: "#c55837",
+    height: 600,
+    width: 400,
+  },
+  livingRoom: {
+    borderRadius: 10,
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "white",
+    backgroundColor: "#e1a555",
+    height: 300,
+    width: 300,
+  },
+  bedroom: {
+    borderRadius: 10,
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "white",
+    backgroundColor: "#d99380",
+    height: 300,
+    width: 300,
+  },
+  backyard: {
+    borderRadius: 10,
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "white",
+    backgroundColor: "#768243",
+    height: 300,
+    width: 700,
   },
 });

@@ -4,6 +4,9 @@ import { StyleSheet, View, Image } from "react-native";
 import { Button } from "react-native-paper";
 
 export default Room = (props) => {
+  // here's how you'll access the id
+  console.log(props.route.params.id);
+
   const buttonPress = () => {
     props.navigation.navigate("Memory");
   };
