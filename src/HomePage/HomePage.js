@@ -12,7 +12,7 @@ class HomePage extends Component {
   resolvedRooms = async () => {
     await getAllRooms(1)
       .then((data) => this.setState({ rooms: data.data }))
-      .then((response) =>
+      .then(() =>
         this.props.navigation.navigate("Overview", { rooms: this.state.rooms })
       )
       .catch((error) => console.error(error));
