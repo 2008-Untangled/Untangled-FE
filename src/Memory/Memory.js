@@ -1,19 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-export default Memory = (props) => {
-  // const { id } = props.id;
-  // const { location } = props.location;
-  // const { description } = props.description;
-  // const { image } = props.image;
-  // const { song } = props.song;
-  // const { aromas } = props.aromas;
-
+export default Memory = ({ memory }) => {
   return (
     <View style={styles.container}>
       <Text>MEMORY</Text>
-      {/* <Image source={require(`${image}`)}></Image>
-      <Text> {description} </Text>
+      {console.log(memory.image)}
+      <Image source={{ uri: `${memory.image}` }} style={styles.memoryImage}></Image>
+      {/* <Text> {description} </Text>
       <Text>{aromas}</Text> */}
     </View>
   );
@@ -21,9 +15,20 @@ export default Memory = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: 3,
+    position: "absolute",
     display: "flex",
+    flex: 1,
+    borderColor: "blue",
     justifyContent: "center",
+    width: 300,
+    height: 300,
+  },
+  memoryImage: {
+    zIndex: 5,
+    position: "absolute",
+    flex: 1,
+    width: 300,
+    height: 300,
   },
 });
-
-

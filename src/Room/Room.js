@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { Button } from "react-native-paper";
 import { getRoom, getMemories } from "../apiCalls";
+import  Memory  from "../Memory/Memory";
 
 export default function Room(props) {
   const selectedRoom = props.route.params.id;
 
   const [room, setRoom] = useState({});
   const [memories, setMemories] = useState([]);
+   const [memoryIsSelected, setMemoryAsSelected] = useState(false);
 
   useEffect(() => {
     getSelectedRoom();
@@ -27,7 +28,7 @@ export default function Room(props) {
 
   const getRoomMemories = async () => {
     await getMemories(selectedRoom)
-      .then((data) => console.log(data.data))
+      .then((data) => setMemories(data.data))
       // .then((data) => {
       //   console.log("A", data);
       // })
@@ -37,19 +38,21 @@ export default function Room(props) {
 
   return (
     <View style={styles.container}>
-        <Text>Hopefully a room appears</Text>
-        <Image
-          source={{ uri: `${room.image}` }}
-          style={{ width: 820, height: 1180 }}
-        />
-        <TouchableOpacity
+      <Text>Hopefully a room appears</Text>
+      <Image
+        source={{ uri: `${room.image}` }}
+        style={{ width: 820, height: 1180 }}
+      />
+      <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log("I've been pressed!")
-          return (<Memory selectedMemory={memories[0]}  />)
+          setMemoryAsSelected(true);
+          console.log("I've been pressed!");
+          // return <Memory selectedMemory={memories[0]} />;
         }}
-        >
-          
+      >
+        {memoryIsSelected && 
+         <Memory memory={memories[0]} />}
       </TouchableOpacity>
     </View>
   );
@@ -71,5 +74,5 @@ const styles = StyleSheet.create({
     borderColor: "red",
     width: 300,
     height: 300,
-  }
+  },
 });
