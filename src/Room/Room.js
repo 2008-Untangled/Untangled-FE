@@ -5,42 +5,42 @@ import { getRoom, getMemories } from "../apiCalls";
 
 export default function Room(props) {
   const selectedRoom = props.route.params.id;
-  console.log(props.route.params.id);
 
   const [room, setRoom] = useState({});
+  const [memories, setMemories] = useState([]);
 
   useEffect(() => {
     getSelectedRoom();
-    console.log(room);
+    getRoomMemories();
   }, []);
 
   const getSelectedRoom = async () => {
     await getRoom(selectedRoom)
       .then((data) => setRoom(data.data))
-      .then((response) => {
+      .then(() => {
         console.log(room);
       })
 
       .catch((error) => console.error(error));
   };
 
-  //  getRoomMemories = async () => {
-  //    await getMemories(selectedRoom)
-  //      .then((data) => console.log(data))
-  //      .then((response) => {
-  //        console.log(response);
-  //      })
+  const getRoomMemories = async () => {
+    await getMemories(selectedRoom)
+      .then((data) => setMemories(data.data))
+      .then(() => {
+        console.log(memories);
+      })
 
-  //      .catch((error) => console.error(error));
-  //  };
-  console.log(room.image)
+      .catch((error) => console.error(error));
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <Text>Hopefully a room appears</Text>
         <Image
           source={{ uri: `${room.image}` }}
-          style={{ width: 400, height: 400 }}
+          style={{ width: 820, height: 1180 }}
         />
       </TouchableOpacity>
     </View>
