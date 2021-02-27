@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default Overview = ({ navigation, route }) => {
   let kitchen = route.params.rooms[0];
-  let livingRoom = route.params.rooms[1];
-  let backyard = route.params.rooms[2];
-  let bedroom = route.params.rooms[3];
+  let bedroom = route.params.rooms[1];
+  let livingRoom = route.params.rooms[2];
+  let backyard = route.params.rooms[3];
 
   const routeToRoom = (id) => {
     navigation.navigate("Room", { id: id });
