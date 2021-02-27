@@ -36,12 +36,17 @@ export default function Room(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
         <Text>Hopefully a room appears</Text>
         <Image
           source={{ uri: `${room.image}` }}
           style={{ width: 820, height: 1180 }}
         />
+        <TouchableOpacity
+        onPress={() => {
+          
+        }}
+        >
+          
       </TouchableOpacity>
     </View>
   );
