@@ -29,15 +29,16 @@ export default function Room(props) {
   const getRoomMemories = async () => {
     await getMemories(selectedRoom)
       .then((data) => setMemories(data.data))
-      // .then((data) => {
-      //   console.log("A", data);
-      // })
-
       .catch((error) => console.error(error));
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={(event) =>
+        console.log(event.nativeEvent.locationX, event.nativeEvent.locationY)
+      }
+      style={styles.container}
+    >
       <Text>Hopefully a room appears</Text>
       <Image
         source={{ uri: `${room.image}` }}
@@ -47,14 +48,11 @@ export default function Room(props) {
         style={styles.button}
         onPress={() => {
           setMemoryAsSelected(true);
-          console.log("I've been pressed!");
-          // return <Memory selectedMemory={memories[0]} />;
         }}
       >
-        {memoryIsSelected && 
-         <Memory memory={memories[0]} />}
+        {memoryIsSelected && <Memory memory={memories[0]} />}
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -72,6 +70,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     borderWidth: 4,
     borderColor: "red",
+    bottom: 200,
+    left: 60,
     width: 300,
     height: 300,
   },
