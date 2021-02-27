@@ -16,11 +16,9 @@ export default function Room(props) {
   }, []);
 
   const getSelectedRoom = async () => {
-    //  console.log(selectedRoom);
     await getRoom(selectedRoom)
       .then((data) => setRoom(data.data))
       .then(() => {
-        // console.log(room);
       })
 
       .catch((error) => console.error(error));
@@ -29,6 +27,7 @@ export default function Room(props) {
   const getRoomMemories = async () => {
     await getMemories(selectedRoom)
       .then((data) => setMemories(data.data))
+      .then((data) => console.log(memories))
       .catch((error) => console.error(error));
   };
 

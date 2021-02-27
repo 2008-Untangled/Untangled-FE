@@ -6,12 +6,12 @@ export default Memory = ({ memory }) => {
   return (
     <View style={styles.container}>
       <Text>MEMORY</Text>
-      <Modal source={{ uri: `${memory.image}` }} style={styles.memoryImage}>
+      {/* <Modal source={{ uri: `${memory.image}` }} style={styles.memoryImage}> */}
         <View>
           <Text> {memory.description} </Text>
           <Text>{memory.aromas}</Text>
         </View>
-      </Modal>
+      {/* </Modal> */}
     </View>
   );
 };
