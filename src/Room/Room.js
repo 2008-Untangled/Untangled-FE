@@ -15,10 +15,11 @@ export default function Room(props) {
   }, []);
 
   const getSelectedRoom = async () => {
+    //  console.log(selectedRoom);
     await getRoom(selectedRoom)
       .then((data) => setRoom(data.data))
       .then(() => {
-        console.log(room);
+        // console.log(room);
       })
 
       .catch((error) => console.error(error));
@@ -26,10 +27,10 @@ export default function Room(props) {
 
   const getRoomMemories = async () => {
     await getMemories(selectedRoom)
-      .then((data) => setMemories(data.data))
-      .then(() => {
-        console.log(memories);
-      })
+      .then((data) => console.log(data.data))
+      // .then((data) => {
+      //   console.log("A", data);
+      // })
 
       .catch((error) => console.error(error));
   };
@@ -42,8 +43,10 @@ export default function Room(props) {
           style={{ width: 820, height: 1180 }}
         />
         <TouchableOpacity
+        style={styles.button}
         onPress={() => {
-          
+          console.log("I've been pressed!")
+          return (<Memory selectedMemory={memories[0]}  />)
         }}
         >
           
@@ -54,10 +57,19 @@ export default function Room(props) {
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: -1,
     display: "flex",
     backgroundColor: "#fff",
     fontWeight: "bold",
     alignItems: "center",
     justifyContent: "center",
   },
+  button: {
+    zIndex: 2,
+    position: "absolute",
+    borderWidth: 4,
+    borderColor: "red",
+    width: 300,
+    height: 300,
+  }
 });
