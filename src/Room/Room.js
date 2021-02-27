@@ -1,34 +1,51 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
+import { getRoom, getMemories } from "../apiCalls";
 
-export default Room = (props) => {
-  // here's how you'll access the id
+export default function Room(props) {
+  const selectedRoom = props.route.params.id;
   console.log(props.route.params.id);
 
-  const buttonPress = () => {
-    props.navigation.navigate("Memory");
+  const [room, setRoom] = useState({});
+
+  useEffect(() => {
+    getSelectedRoom();
+    console.log(room);
+  }, []);
+
+  const getSelectedRoom = async () => {
+    await getRoom(selectedRoom)
+      .then((data) => setRoom(data.data))
+      .then((response) => {
+        console.log(room);
+      })
+
+      .catch((error) => console.error(error));
   };
 
+  //  getRoomMemories = async () => {
+  //    await getMemories(selectedRoom)
+  //      .then((data) => console.log(data))
+  //      .then((response) => {
+  //        console.log(response);
+  //      })
+
+  //      .catch((error) => console.error(error));
+  //  };
+  console.log(room.image)
   return (
     <View style={styles.container}>
-      <Button
-        onPress={() => {
-          buttonPress();
-        }}
-        style={{ margin: 20 }}
-      >
-        TO MEMORY
-      </Button>
-      <Image
-        source={require("../../assets/backdrops/livingroom.png")}
-        style={{ width: "90%", height: "90%" }}
-      ></Image>
-      <StatusBar style="auto" />
+      <TouchableOpacity>
+        <Text>Hopefully a room appears</Text>
+        <Image
+          source={{ uri: `${room.image}` }}
+          style={{ width: 400, height: 400 }}
+        />
+      </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
