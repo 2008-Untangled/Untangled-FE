@@ -1,17 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import Modal from "../UI/Modal";
+import { StyleSheet, Text, View, Image, Modal } from "react-native";
+// import Modal from "../UI/Modal";
 
 export default Memory = ({ memory }) => {
   return (
     <View style={styles.container}>
       <Text>MEMORY</Text>
-      {/* <Modal source={{ uri: `${memory.image}` }} style={styles.memoryImage}> */}
-        <View>
-          <Text> {memory.description} </Text>
-          <Text>{memory.aromas}</Text>
-        </View>
-      {/* </Modal> */}
+      <Modal >
+        <Image source={{ uri: `${memory.image}` }}></Image>
+        <Text>{memory.description}</Text>
+        <Text>{memory.aromas}</Text>
+      </Modal>
     </View>
   );
 };
