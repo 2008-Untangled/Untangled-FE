@@ -21,11 +21,7 @@ export default function Room(props) {
               setSelectedMemory(memory.id);
             }}>
             {selectedMemory === memory.id && (
-              <Memory
-                memory={memory}
-                modalVisibility={true}
-                setSelectedMemory={setSelectedMemory}
-              />
+              <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
             )}
           </TouchableOpacity>
         );
@@ -54,7 +50,6 @@ export default function Room(props) {
         }
         return memoryCoordinates;
       }, {});
-      console.log(memoryCoordinates);
       return memoryCoordinates;
     }
   };
@@ -67,15 +62,12 @@ export default function Room(props) {
   const getSelectedRoom = async () => {
     await getRoom(selectedRoom)
       .then((data) => setRoom(data.data))
-      .then(() => {})
-
       .catch((error) => console.error(error));
   };
 
   const getRoomMemories = async () => {
     await getMemories(selectedRoom)
       .then((data) => setMemories(data.data))
-      .then((data) => console.log(memories))
       .catch((error) => console.error(error));
   };
 
@@ -93,17 +85,12 @@ export default function Room(props) {
   const memoryStyles = StyleSheet.create(createMemoryStyles());
 
   return (
-    <TouchableOpacity
-      onPress={(event) =>
-        console.log(event.nativeEvent.locationX, event.nativeEvent.locationY)
-      }
-      style={styles.container}>
-      <Text>Hopefully a room appears</Text>
+    <View style={styles.container}>
       <Image
         source={{ uri: `${room.image}` }}
         style={{ width: 820, height: 1180 }}
       />
       {memories && createMemories()}
-    </TouchableOpacity>
+    </View>
   );
 }
