@@ -20,7 +20,13 @@ export default function Room(props) {
             onPress={() => {
               setSelectedMemory(memory.id);
             }}>
-            {selectedMemory === memory.id && <Memory memory={memory} />}
+            {selectedMemory === memory.id && (
+              <Memory
+                memory={memory}
+                modalVisibility={true}
+                setSelectedMemory={setSelectedMemory}
+              />
+            )}
           </TouchableOpacity>
         );
       });
@@ -37,13 +43,13 @@ export default function Room(props) {
           memoryCoordinates[memory.id] = {
             zIndex: 2,
             position: "absolute",
-            borderRadius: 100,
+            borderRadius: 75,
             borderWidth: 4,
             borderColor: "red",
-            bottom: memory.y,
-            right: memory.x,
-            width: 300,
-            height: 300,
+            top: memory.y - 50,
+            left: memory.x - 75,
+            width: 150,
+            height: 150,
           };
         }
         return memoryCoordinates;
