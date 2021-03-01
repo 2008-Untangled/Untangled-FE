@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -17,11 +18,12 @@ export default Memory = ({ memory, setSelectedMemory }) => {
   return (
     <View style={styles.container}>
       <Text>CLICK ME</Text>
-      <Modal presentationStyle='pageSheet' visible={modalVisible}>
+      <Modal presentationStyle="pageSheet" visible={modalVisible}>
         <View style={styles.modalView}>
           <Image
             source={{ uri: `${memory.image}` }}
-            style={styles.memoryImage}></Image>
+            style={styles.memoryImage}
+          ></Image>
           <View style={styles.textContainer}>
             <Text style={styles.textStyle}>{memory.description}</Text>
 
@@ -31,8 +33,9 @@ export default Memory = ({ memory, setSelectedMemory }) => {
             onPress={() => {
               setModalVisible(!modalVisible);
               setSelectedMemory(null);
-            }}>
-            <Text style={styles.hideButton}>Go Back</Text>
+            }}
+          >
+            <Text style={styles.hideButton} title={"Press Me"}>GO BACK</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -45,16 +48,19 @@ const styles = StyleSheet.create({
     position: "absolute",
     display: "flex",
     flex: 1,
-    borderColor: "blue",
+    flexDirection: "column",
     alignContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     width: 150,
     height: 150,
   },
   memoryImage: {
+    marginTop: 3,
+    borderRadius: 20,
     position: "absolute",
-    width: 300,
-    height: 300,
+    width: 600,
+    height: 600,
   },
   modalView: {
     margin: 20,
@@ -72,16 +78,21 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     position: "absolute",
-    top: 400,
+    top: 650,
   },
   textStyle: {
     fontSize: 30,
+    marginBottom: 2,
   },
   hideButton: {
-    fontSize: 100,
-    borderColor: "lime",
-    borderRadius: 15,
-    borderWidth: 20,
-    top: 700,
+    marginTop: 3,
+    padding: 5,
+    position: "relative",
+    fontSize: 50,
+    color: "#fff",
+    backgroundColor: "#e1a555",
+    borderRadius: 5,
+    borderWidth: 5,
+    bottom: -750,
   },
 });
