@@ -14,10 +14,10 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="HomePage" component={HomePage} />
-          <Stack.Screen name="Overview" component={Overview} />
-          <Stack.Screen name="Room" component={Room} />
-          <Stack.Screen name="Memory" component={Memory} />
+          <Stack.Screen name='HomePage' component={HomePage} />
+          <Stack.Screen name='Overview' component={Overview} />
+          <Stack.Screen name='Room' component={Room} />
+          <Stack.Screen name='Memory' component={Memory} />
         </Stack.Navigator>
       </NavigationContainer>
     );
