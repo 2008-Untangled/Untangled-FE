@@ -9,15 +9,20 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-// import Modal from "../UI/Modal";
+import Form from '../Form/Form';
 
 export default Memory = ({ memory, setSelectedMemory }) => {
   const [modalVisible, setModalVisible] = useState(true);
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <View style={styles.container}>
       <Text>CLICK ME</Text>
       <Modal presentationStyle='pageSheet' visible={modalVisible}>
+        <TouchableOpacity style={{height: 50, width: 50, position: "absolute", right: 100}} onPress={() => console.log("Shit"), setEditMode(true)}>
+          <Text>Click to edit</Text>
+        </TouchableOpacity>
+        {true ? <Form /> : 
         <View style={styles.modalView}>
           <Image
             source={{ uri: `${memory.image}` }}
@@ -25,7 +30,7 @@ export default Memory = ({ memory, setSelectedMemory }) => {
           <View style={styles.textContainer}>
             <Text style={styles.textStyle}>{memory.description}</Text>
 
-            <Text style={styles.textStyle}>Smells like: {memory.aromas}</Text>
+            <Text style={styles.textStyle}>Test: {memory.aromas}</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -35,6 +40,7 @@ export default Memory = ({ memory, setSelectedMemory }) => {
             <Text style={styles.hideButton}>Go Back</Text>
           </TouchableOpacity>
         </View>
+        }
       </Modal>
     </View>
   );
