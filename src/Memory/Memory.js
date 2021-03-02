@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#fff",
     backgroundColor: "#e1a555",
-    borderRadius: 5,
     borderWidth: 5,
     bottom: -750,
   },
