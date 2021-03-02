@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { editMemory } from "../apiCalls";
 
 
 // Edit is clicked from within a memory
@@ -18,19 +19,45 @@ import {
 
 
 export default MemoryForm = ({memory}) => {
+  const [updatedDescriptionText, setUpdatedDescriptionText] = useState(memory.description);
+  const [updatedAromaText, setUpdatedAromaText] = useState(memory.aromas);
+  const [updatedMemory, setUpdatedMemory] = useState({});
   const [modalVisible, setModalVisible] = useState(true);
+
+  useEffect(() => {
+    if (Object.keys(updatedMemory).length) {
+      editMemory(memory.id, updatedMemory)
+      .then(response => console.log(response))
+    }
+  }, [updatedMemory])
 
   return (
     <View style={styles.formContainer}>
       <Image source={{ uri: `${memory.image}` }} style={styles.memoryImage}></Image>
-      <TextInput style={styles.inputField}>
+      <TextInput onChangeText={(text) => {
+        setUpdatedDescriptionText(text);
+        // setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});
+      }
+      } 
+        style={styles.inputField}>
         {memory.description}
       </TextInput>
-      <TextInput style={styles.inputField}>
+      <TextInput onChangeText={(text) => {
+        setUpdatedAromaText(text);
+      }
+      } 
+        style={styles.inputField}>
         {memory.aromas}
       </TextInput>
-      <Button title="submit button">Submit</Button>
-    </View>
+      <Button onPress={()=> {
+        setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText})
+        // .then(() => console.log(updatedMemory))
+        // console.log(updatedMemory);
+        console.log("An API call happens here");
+        // editMemory(memory.id, updatedMemory)
+        // .then(response => console.log(response))
+      }} title="submit button">Submit</Button>
+    </View>       
   )
 }
 
