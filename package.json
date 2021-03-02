@@ -6,10 +6,17 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "CI=true npm test -- --env=jsdom --coverage"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@?react-navigation)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -20,7 +27,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "react-native-gesture-handler": "~1.8.0",
+    "react-native-gesture-handler": "^1.8.0",
     "react-native-paper": "^4.7.2",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
