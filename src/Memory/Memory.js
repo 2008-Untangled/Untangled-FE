@@ -9,7 +9,7 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import Form from '../Form/Form';
+import MemoryForm from '../MemoryForm/MemoryForm';
 
 export default Memory = ({ memory, setSelectedMemory }) => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -19,10 +19,12 @@ export default Memory = ({ memory, setSelectedMemory }) => {
     <View style={styles.container}>
       <Text>CLICK ME</Text>
       <Modal presentationStyle='pageSheet' visible={modalVisible}>
-        <TouchableOpacity style={{height: 50, width: 50, position: "absolute", right: 100}} onPress={() => console.log("Shit"), setEditMode(true)}>
+        <TouchableOpacity style={{height: 50, width: 50, position: "absolute", right: 100}} onPress={() => {
+          console.log("Shit")
+          setEditMode(true)}}>
           <Text>Click to edit</Text>
         </TouchableOpacity>
-        {true ? <Form /> : 
+        {editMode ? <MemoryForm memory={memory}/> :
         <View style={styles.modalView}>
           <Image
             source={{ uri: `${memory.image}` }}
@@ -40,7 +42,7 @@ export default Memory = ({ memory, setSelectedMemory }) => {
             <Text style={styles.hideButton}>Go Back</Text>
           </TouchableOpacity>
         </View>
-        }
+        }        
       </Modal>
     </View>
   );
