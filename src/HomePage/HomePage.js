@@ -29,6 +29,7 @@ class HomePage extends Component {
           <Image
             source={require("../../assets/backdrops/homefront.png")}
             style={{ width: "100%", height: "100%" }}
+            testID="homeFront"
           />
         </TouchableOpacity>
       </View>
