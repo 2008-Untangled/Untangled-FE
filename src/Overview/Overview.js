@@ -13,7 +13,7 @@ export default Overview = ({ navigation, route }) => {
 
   return (
     <View>
-      <Text style={styles.title}>Select any room to explore</Text>
+      <Text style={styles.title}>SELECT ANY ROOM TO EXPLORE</Text>
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => {
@@ -75,9 +75,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#efefef",
+    textAlign: "center",
     fontSize: 30,
     fontStyle: "normal",
+    color: "#272626",
+    borderColor: "#e1a555",
+    borderWidth: 5,
+    width: "60%",
+    padding: 10,
+    borderRadius: 20,
   },
   stack: {
     padding: 0,
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#c55837",
     height: 600,
     width: 400,
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#e1a555",
     height: 300,
     width: 300,
@@ -119,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#d99380",
     height: 300,
     width: 300,
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#768243",
     height: 300,
     width: 700,
