@@ -18,9 +18,10 @@ export default Memory = ({ memory, setSelectedMemory }) => {
 
   return (
     <View style={styles.container}>
+      <Text>CLICK ME</Text>
       <Modal presentationStyle="pageSheet" visible={modalVisible}>
         <TouchableOpacity
-          title="Click to edit"
+          style={{ height: 50, width: 50, position: "absolute", right: 100 }}
           onPress={() => {
             setEditMode(true);
           }}
@@ -36,9 +37,8 @@ export default Memory = ({ memory, setSelectedMemory }) => {
               style={styles.memoryImage}
             ></Image>
             <View style={styles.textContainer}>
-              <Text style={styles.textStyle}>{memory.description}</Text>
-
-              <Text style={styles.textStyle}>{memory.aromas}</Text>
+              <Text style={styles.textStyle}>Remember: {memory.description}</Text>
+              <Text style={styles.textStyle}>Aromas: {memory.aromas}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {

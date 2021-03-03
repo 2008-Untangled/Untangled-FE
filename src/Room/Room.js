@@ -10,16 +10,18 @@ export default function Room(props) {
   const [memories, setMemories] = useState([]);
   const [selectedMemory, setSelectedMemory] = useState(null);
 
-  const createMemories = () => {
+  const createMemories = (memories) => {
     if (memories.length > 0) {
       let memoryComponents = memories.map((memory) => {
         return (
           <TouchableOpacity
-          key={memory.id}
-          style={memoryStyles[memory.id]}
-          onPress={() => {
-            setSelectedMemory(memory.id);
-          }}>
+            testID={memory.id}
+            key={memory.id}
+            style={memoryStyles[memory.id]}
+            onPress={() => {
+              setSelectedMemory(memory.id);
+            }}
+          >
             {selectedMemory === memory.id && (
               <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
             )}
@@ -91,7 +93,7 @@ export default function Room(props) {
         source={{ uri: `${room.image}` }}
         style={{ width: 820, height: 1180 }}
       />
-      {memories && createMemories()}
+      {memories && createMemories(memories)}
     </View>
   );
 }
