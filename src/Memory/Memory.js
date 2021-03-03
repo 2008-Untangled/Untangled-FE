@@ -21,7 +21,6 @@ export default Memory = ({ memory, setSelectedMemory }) => {
       <Text>CLICK ME</Text>
       <Modal presentationStyle='pageSheet' visible={modalVisible}>
         <TouchableOpacity style={{height: 50, width: 50, position: "absolute", right: 100}} onPress={() => {
-          console.log("Shit")
           setEditMode(true)}}>
           <Text>Click to edit</Text>
         </TouchableOpacity>

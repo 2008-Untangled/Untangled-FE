@@ -34,7 +34,7 @@ class HomePage extends Component {
             source={require("../../assets/backdrops/homefront.png")}
             style={{ width: "100%", height: "100%" }}
           />
-          <Text style={styles.textStyle}>CLICK ANYWHERE</Text>
+          <Text style={styles.textStyle}>TAP ANYWHERE</Text>
         </TouchableOpacity>
       </View>
     );
@@ -56,9 +56,13 @@ const styles = StyleSheet.create({
     flex: 1,
     bottom: 200,
     alignSelf: "center",
-    fontSize: 25,
+    fontSize: 30,
     fontStyle: "normal",
-    color: "#272626",
+    color: "#000",
+    borderColor: "#e1a555",
+    borderWidth: 5,
+    padding: 10,
+    borderRadius: 20,
   },
 });
 
