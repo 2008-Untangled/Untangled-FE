@@ -15,11 +15,11 @@ export default function Room(props) {
       let memoryComponents = memories.map((memory) => {
         return (
           <TouchableOpacity
-            key={memory.id}
-            style={memoryStyles[memory.id]}
-            onPress={() => {
-              setSelectedMemory(memory.id);
-            }}>
+          key={memory.id}
+          style={memoryStyles[memory.id]}
+          onPress={() => {
+            setSelectedMemory(memory.id);
+          }}>
             {selectedMemory === memory.id && (
               <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
             )}
@@ -86,6 +86,7 @@ export default function Room(props) {
 
   return (
     <View style={styles.container}>
+      <Text style={stylesText.textStyle}>TAP CIRCLES TO VIEW MEMORIES</Text>
       <Image
         source={{ uri: `${room.image}` }}
         style={{ width: 820, height: 1180 }}
@@ -94,3 +95,21 @@ export default function Room(props) {
     </View>
   );
 }
+
+const stylesText = StyleSheet.create({
+  textStyle: {
+    position: "absolute",
+    zIndex: 7,
+    flex: 1,
+    top: 70,
+    alignSelf: "center",
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#515c2e",
+    borderColor: "#e1a555",
+    borderWidth: 5,
+    padding: 10,
+    borderRadius: 20,
+  },
+});
+4

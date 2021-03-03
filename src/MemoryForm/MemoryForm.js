@@ -56,7 +56,7 @@ export default MemoryForm = ({memory}) => {
         console.log("An API call happens here");
         // editMemory(memory.id, updatedMemory)
         // .then(response => console.log(response))
-      }} title="submit button">Submit</Button>
+      }} title="submit button" style={styles.button}>Submit</Button>
     </View>       
   )
 }
@@ -67,18 +67,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    alignContent: "space-around",
+    alignContent: "space-between",
     alignItems: "center",
     zIndex: 7,
     borderColor: "red",
     fontSize: 20,
   },
   inputField: {
+    marginTop: 3,
     display: "flex",
     flexWrap: "wrap",
     textAlign: "justify",
     borderStyle: "solid",
-    borderColor: "#fc6d47",
+    borderColor: "#b5b7b3",
     height: 100,
     width: "80%",
     fontSize: 50,
@@ -86,13 +87,16 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   button: {
+    backgroundColor: "#e1a555",
+    borderRadius: 20,
     height: 20,
     width: 50,
   },
   memoryImage: {
-    // zIndex: 7,
-    // position: "absolute",
-    width: 300,
-    height: 300,
-  }
-})
+    zIndex: 1,
+    marginTop: 3,
+    borderRadius: 20,
+    width: 400,
+    height: 400,
+  },
+});

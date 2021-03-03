@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { getAllRooms } from "../apiCalls";
 
 class HomePage extends Component {
@@ -27,13 +27,43 @@ class HomePage extends Component {
           }}
         >
           <Image
+            source={require("../../assets/logolarge.png")}
+            style={ styles.logo }
+          />
+          <Image
             source={require("../../assets/backdrops/homefront.png")}
             style={{ width: "100%", height: "100%" }}
           />
+          <Text style={styles.textStyle}>TAP ANYWHERE</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    display: "flex",
+    position: "absolute",
+    zIndex: 7,
+    flex: 1,
+    marginTop: 100,
+    alignSelf: "center",
+  },
+  textStyle: {
+    position: "absolute",
+    zIndex: 7,
+    flex: 1,
+    bottom: 150,
+    alignSelf: "center",
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#515c2e",
+    borderColor: "#e1a555",
+    borderWidth: 5,
+    padding: 10,
+    borderRadius: 20,
+  },
+});
 
 export default HomePage;
