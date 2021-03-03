@@ -12,53 +12,79 @@ export default Overview = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => {
-          routeToRoom(kitchen.id);
-        }}>
-        <View style={styles.kitchen}>
-          <Text style={styles.textKitchen}>{kitchen.name}</Text>
-        </View>
-      </TouchableOpacity>
-      <View style={styles.stack}>
+    <View>
+      <Text style={styles.title}>SELECT ANY ROOM TO EXPLORE</Text>
+      <View style={styles.container}>
         <TouchableOpacity
           onPress={() => {
-            routeToRoom(livingRoom.id);
-          }}>
-          <View style={styles.livingRoom}>
-            <Text style={styles.text}>{livingRoom.name}</Text>
+            routeToRoom(kitchen.id);
+          }}
+        >
+          <View style={styles.kitchen}>
+            <Text style={styles.textKitchen}>{kitchen.name}</Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.stack}>
+          <TouchableOpacity
+            onPress={() => {
+              routeToRoom(livingRoom.id);
+            }}
+          >
+            <View style={styles.livingRoom}>
+              <Text style={styles.text}>{livingRoom.name}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              routeToRoom(bedroom.id);
+            }}
+          >
+            <View style={styles.bedroom}>
+              <Text style={styles.text}>{bedroom.name}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           onPress={() => {
-            routeToRoom(bedroom.id);
-          }}>
-          <View style={styles.bedroom}>
-            <Text style={styles.text}>{bedroom.name}</Text>
+            routeToRoom(backyard.id);
+          }}
+        >
+          <View style={styles.backyard}>
+            <Text style={styles.text}>{backyard.name}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          routeToRoom(backyard.id);
-        }}>
-        <View style={styles.backyard}>
-          <Text style={styles.text}>{backyard.name}</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",
     flexWrap: "wrap",
+  },
+  backup: {
+    backgroundColor: "#FFFFFF",
+  },
+  title: {
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    fontSize: 30,
+    fontStyle: "normal",
+    color: "#515c2e",
+    borderColor: "#e1a555",
+    borderWidth: 5,
+    width: "80%",
+    padding: 10,
+    borderRadius: 20,
+    fontWeight: "bold",
   },
   stack: {
     padding: 0,
@@ -82,7 +108,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#c55837",
     height: 600,
     width: 400,
@@ -91,7 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#e1a555",
     height: 300,
     width: 300,
@@ -100,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#d99380",
     height: 300,
     width: 300,
@@ -109,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: "white",
+    borderColor: "#FFFFFF",
     backgroundColor: "#768243",
     height: 300,
     width: 700,
