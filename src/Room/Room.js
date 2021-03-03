@@ -15,11 +15,11 @@ export default function Room(props) {
       let memoryComponents = memories.map((memory) => {
         return (
           <TouchableOpacity
-            key={memory.id}
-            style={memoryStyles[memory.id]}
-            onPress={() => {
-              setSelectedMemory(memory.id);
-            }}>
+          key={memory.id}
+          style={memoryStyles[memory.id]}
+          onPress={() => {
+            setSelectedMemory(memory.id);
+          }}>
             {selectedMemory === memory.id && (
               <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
             )}

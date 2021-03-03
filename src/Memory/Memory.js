@@ -18,15 +18,14 @@ export default Memory = ({ memory, setSelectedMemory }) => {
 
   return (
     <View style={styles.container}>
-      <Text>CLICK ME</Text>
       <Modal presentationStyle="pageSheet" visible={modalVisible}>
         <TouchableOpacity
-          style={{ height: 50, width: 50, position: "absolute", right: 100 }}
+          title="Click to edit"
           onPress={() => {
             setEditMode(true);
           }}
         >
-          <Text style={styles.edit}>Click to edit</Text>
+          <Text style={styles.edit}>Click HERE to edit</Text>
         </TouchableOpacity>
         {editMode ? (
           <MemoryForm memory={memory} />
@@ -70,7 +69,18 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
+  edit: {
+    fontSize: 25,
+    display: "flex",
+    justifyContent: "flex-start",
+    marginTop: 15,
+    marginBottom: 5,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#515c2e",
+  },
   memoryImage: {
+    zIndex: 1,
     marginTop: 3,
     borderRadius: 20,
     position: "absolute",
