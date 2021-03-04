@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { getRoom, getMemories } from "../apiCalls";
 import Memory from "../Memory/Memory";
+import ThoughtBubble from "../../assets/SVGs/noun_Thinking_1774494.svg"
 
 export default function Room(props) {
   const selectedRoom = props.route.params.id;
@@ -22,6 +23,10 @@ export default function Room(props) {
               setSelectedMemory(memory.id);
             }}
           >
+            <Image
+            source={require("../../assets/thoughtBubble.png")}
+            style={{height: 150, width: 150}}
+          />
             {selectedMemory === memory.id && (
               <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
             )}
@@ -41,9 +46,9 @@ export default function Room(props) {
           memoryCoordinates[memory.id] = {
             zIndex: 2,
             position: "absolute",
-            borderRadius: 75,
-            borderWidth: 4,
-            borderColor: "red",
+            // borderRadius: 75,
+            // borderWidth: 4,
+            // borderColor: "red",
             top: memory.y - 50,
             left: memory.x - 75,
             width: 150,
@@ -59,7 +64,7 @@ export default function Room(props) {
   useEffect(() => {
     getSelectedRoom();
     getRoomMemories();
-  }, []);
+  }, [selectedMemory]);
 
   const getSelectedRoom = async () => {
     await getRoom(selectedRoom)
