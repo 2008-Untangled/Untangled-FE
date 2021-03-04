@@ -8,9 +8,10 @@ import {
   Modal,
   Button,
   TouchableOpacity,
-  TextInput,
 } from "react-native";
 import { editMemory } from "../apiCalls";
+import { TextInput } from 'react-native-paper';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 
 // Edit is clicked from within a memory
@@ -18,45 +19,62 @@ import { editMemory } from "../apiCalls";
 // form will render instead of static memory
 
 
-export default MemoryForm = ({memory}) => {
+export default MemoryForm = ({memory, setSelectedMemory, setModalVisible, modalVisible, setEditMode, editMode}) => {
   const [updatedDescriptionText, setUpdatedDescriptionText] = useState(memory.description);
   const [updatedAromaText, setUpdatedAromaText] = useState(memory.aromas);
   const [updatedMemory, setUpdatedMemory] = useState({});
-  const [modalVisible, setModalVisible] = useState(true);
-
+  // const [formVisible, setFormVisible] = useState(true);
+  
   useEffect(() => {
+    // console.log('updatedMemory :>> ', updatedMemory);
+    console.log('updatedDescriptionText :>> ', updatedDescriptionText);
+    console.log('updatedAromaText :>> ', updatedAromaText);
     if (Object.keys(updatedMemory).length) {
+      console.log('if there is a new memory', updatedMemory);
       editMemory(memory.id, updatedMemory)
       .then(response => console.log(response))
+      .then(alert("Success, your memory has been updated!"))
+      setSelectedMemory(null);
+      setModalVisible(!modalVisible);
     }
   }, [updatedMemory])
 
   return (
     <View style={styles.formContainer}>
       <Image source={{ uri: `${memory.image}` }} style={styles.memoryImage}></Image>
-      <TextInput onChangeText={(text) => {
-        setUpdatedDescriptionText(text);
+      <Text>Description:</Text>
+      <TextInput 
+        style={{backgroundColor: "#D3D3D3"}}
+        multiline={true}
+        mode={"outlined"}
+        underlineColor="black"
+        onChangeText={(text) => {
+          setUpdatedDescriptionText(text);
         // setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});
-      }
-      } 
-        style={styles.inputField}>
+        }
+      }>
         {memory.description}
       </TextInput>
-      <TextInput onChangeText={(text) => {
+      <Text>Aromas:</Text>
+      <TextInput style={{backgroundColor: "#D3D3D3"}} multiline={true} mode={"outlined"} underlineColor="black" onChangeText={(text) => {
         setUpdatedAromaText(text);
       }
       } 
-        style={styles.inputField}>
+        >
         {memory.aromas}
       </TextInput>
-      <Button onPress={()=> {
-        setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText})
-        // .then(() => console.log(updatedMemory))
-        // console.log(updatedMemory);
-        console.log("An API call happens here");
-        // editMemory(memory.id, updatedMemory)
-        // .then(response => console.log(response))
-      }} title="submit button" style={styles.button}>Submit</Button>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={()=> {
+          setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});          
+        }} > 
+          <Text style={styles.button}>SUBMIT</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> {
+          setEditMode(!editMode);
+        }} >
+          <Text style={styles.button}>BACK TO MEMORY</Text>
+        </TouchableOpacity>
+      </View>
     </View>       
   )
 }
@@ -86,11 +104,21 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     flexShrink: 1,
   },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignContent: "center",
+  },
   button: {
-    backgroundColor: "#e1a555",
+    textAlign: "center",
+    margin: 5,
+    padding: 5,
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "#515c2e",
+    borderColor: "#e1a555",
+    borderWidth: 5,
     borderRadius: 20,
-    height: 20,
-    width: 50,
   },
   memoryImage: {
     zIndex: 1,

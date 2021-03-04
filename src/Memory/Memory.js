@@ -17,43 +17,43 @@ export default Memory = ({ memory, setSelectedMemory }) => {
   const [editMode, setEditMode] = useState(false);
 
   return (
+  <View >
     <View style={styles.container}>
-      <Text>CLICK ME</Text>
       <Modal presentationStyle="pageSheet" visible={modalVisible}>
-        <TouchableOpacity
-          style={{ height: 50, width: 50, position: "absolute", right: 100 }}
-          onPress={() => {
-            setEditMode(true);
-          }}
-        >
-          <Text style={styles.edit}>Click HERE to edit</Text>
-        </TouchableOpacity>
         {editMode ? (
-          <MemoryForm memory={memory} />
-        ) : (
-          <View style={styles.modalView}>
-            <Image
-              source={{ uri: `${memory.image}` }}
-              style={styles.memoryImage}
-            ></Image>
-            <View style={styles.textContainer}>
-              <Text style={styles.textStyle}>Remember: {memory.description}</Text>
-              <Text style={styles.textStyle}>Aromas: {memory.aromas}</Text>
+          <MemoryForm editMode={editMode} setEditMode={setEditMode} setSelectedMemory={setSelectedMemory} setModalVisible={setModalVisible} modalVisible={modalVisible} memory={memory} />
+          ) : (
+            <View style={styles.modalView}>
+              <Image
+                source={{ uri: `${memory.image}` }}
+                style={styles.memoryImage}
+                ></Image>
+              <View style={styles.textContainer}>
+                <Text style={styles.textStyle}>Remember: {memory.description}</Text>
+                <Text style={styles.textStyle}>Aromas: {memory.aromas}</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setSelectedMemory(null);
+                }}
+                >
+                <Text style={styles.button} title={"Press Me"}>
+                  GO BACK
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setEditMode(true);
+                }}
+                >
+                <Text style={styles.button}>Click HERE to edit</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                setSelectedMemory(null);
-              }}
-            >
-              <Text style={styles.hideButton} title={"Press Me"}>
-                GO BACK
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+            )}
       </Modal>
     </View>
+  </View>
   );
 };
 
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   edit: {
-    fontSize: 25,
+    fontSize: 24,
     display: "flex",
     justifyContent: "flex-start",
     marginTop: 15,
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     color: "#515c2e",
+    zIndex: 7,
   },
   memoryImage: {
     zIndex: 1,
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 3,
   },
-  hideButton: {
+  button: {
     marginTop: 3,
     padding: 5,
     position: "relative",
