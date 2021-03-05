@@ -8,9 +8,10 @@ import {
   Modal,
   Button,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 import { editMemory } from "../apiCalls";
-import { TextInput } from 'react-native-paper';
+// import { TextInput } from 'react-native-paper';
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 
@@ -33,7 +34,6 @@ export default MemoryForm = ({memory, setSelectedMemory, setModalVisible, modalV
       console.log('if there is a new memory', updatedMemory);
       editMemory(memory.id, updatedMemory)
       .then(response => console.log(response))
-      .then(alert("Success, your memory has been updated!"))
       setSelectedMemory(null);
       setModalVisible(!modalVisible);
     }
@@ -42,12 +42,12 @@ export default MemoryForm = ({memory, setSelectedMemory, setModalVisible, modalV
   return (
     <View style={styles.formContainer}>
       <Image source={{ uri: `${memory.image}` }} style={styles.memoryImage}></Image>
-      <Text>Description:</Text>
+      <Text style={{fontSize: 20}}>Description:</Text>
       <TextInput 
-        style={{backgroundColor: "#D3D3D3"}}
-        multiline={true}
-        mode={"outlined"}
-        underlineColor="black"
+        style={styles.inputField}
+        // multiline={true}
+        // mode={"outlined"}
+        // underlineColor="black"
         onChangeText={(text) => {
           setUpdatedDescriptionText(text);
         // setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});
@@ -55,8 +55,8 @@ export default MemoryForm = ({memory, setSelectedMemory, setModalVisible, modalV
       }>
         {memory.description}
       </TextInput>
-      <Text>Aromas:</Text>
-      <TextInput style={{backgroundColor: "#D3D3D3"}} multiline={true} mode={"outlined"} underlineColor="black" onChangeText={(text) => {
+      <Text style={{fontSize: 20}}>Aromas:</Text>
+      <TextInput style={styles.inputField} onChangeText={(text) => {
         setUpdatedAromaText(text);
       }
       } 
@@ -100,9 +100,10 @@ const styles = StyleSheet.create({
     borderColor: "#b5b7b3",
     height: 100,
     width: "80%",
-    fontSize: 50,
+    fontSize: 45,
     borderWidth: 5,
     flexShrink: 1,
+    backgroundColor: "#D3D3D3"
   },
   buttonContainer: {
     display: "flex",
