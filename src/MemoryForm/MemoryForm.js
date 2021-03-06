@@ -9,6 +9,7 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import { editMemory, deleteMemory } from "../apiCalls";
 // import { TextInput } from 'react-native-paper';
@@ -41,6 +42,28 @@ export default MemoryForm = ({
       setModalVisible(!modalVisible);
     }
   }, [updatedMemory]);
+
+  const displayDeleteConfirmation = () => {
+    Alert.alert(
+      "Delete This Memory?",
+      "Are you sure you want to delete this memory",
+      [
+        {
+          text: "NO",
+          onPress: () => console.warn("NO Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "YES",
+          onPress: () => {
+            console.warn("YES Pressed");
+            deleteMemory(memory.id);
+            setModalVisible(!modalVisible);
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={styles.formContainer}>
@@ -89,8 +112,7 @@ export default MemoryForm = ({
           <TouchableOpacity
             style={styles.deleteButton}
             onPress={() => {
-              deleteMemory(memory.id);
-              setModalVisible(!modalVisible);
+              displayDeleteConfirmation();
             }}>
             <Text>Delete Memory</Text>
           </TouchableOpacity>
