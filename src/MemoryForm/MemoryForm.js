@@ -26,13 +26,14 @@ export default MemoryForm = ({
   modalVisible,
   setEditMode,
   editMode,
+  memoryUpdatedBool,
+  setMemoryUpdatedBool,
 }) => {
   const [updatedDescriptionText, setUpdatedDescriptionText] = useState(
     memory.description
   );
   const [updatedAromaText, setUpdatedAromaText] = useState(memory.aromas);
   const [updatedMemory, setUpdatedMemory] = useState({});
-  // const [formVisible, setFormVisible] = useState(true);
 
   useEffect(() => {
     if (Object.keys(updatedMemory).length) {
@@ -41,7 +42,7 @@ export default MemoryForm = ({
       setSelectedMemory(null);
       setModalVisible(!modalVisible);
     }
-  }, [updatedMemory]);
+  }, [updatedMemory, modalVisible]);
 
   const displayDeleteConfirmation = () => {
     Alert.alert(
@@ -56,7 +57,6 @@ export default MemoryForm = ({
         {
           text: "YES",
           onPress: () => {
-            console.warn("YES Pressed");
             deleteMemory(memory.id);
             setModalVisible(!modalVisible);
           },
@@ -73,12 +73,8 @@ export default MemoryForm = ({
       <Text style={{ fontSize: 20 }}>Description:</Text>
       <TextInput
         style={styles.inputField}
-        // multiline={true}
-        // mode={"outlined"}
-        // underlineColor="black"
         onChangeText={(text) => {
           setUpdatedDescriptionText(text);
-          // setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});
         }}>
         {memory.description}
       </TextInput>

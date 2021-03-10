@@ -1,8 +1,15 @@
-import React, { useState, useEffect, memo } from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { getRoom, getMemories } from "../apiCalls";
 import Memory from "../Memory/Memory";
-import ThoughtBubble from "../../assets/SVGs/noun_Thinking_1774494.svg"
+import ThoughtBubble from "../../assets/SVGs/noun_Thinking_1774494.svg";
 
 export default function Room(props) {
   const selectedRoom = props.route.params.id;
@@ -10,6 +17,32 @@ export default function Room(props) {
   const [room, setRoom] = useState({});
   const [memories, setMemories] = useState([]);
   const [selectedMemory, setSelectedMemory] = useState(null);
+  const [memoryUpdatedBool, setMemoryUpdatedBool] = useState(false);
+
+  const displayUpdateConfirmation = () => {
+    console.log(memoryUpdatedBool, "actual function");
+    Alert.alert(
+      "Memory Updated!",
+      "Your memory has been successfully updated!",
+      [
+        {
+          text: "Okay",
+          onPress: () => {
+            console.warn("Okay Pressed");
+            setMemoryUpdatedBool(!memoryUpdatedBool);
+          },
+        },
+      ]
+    );
+  };
+
+  useEffect(() => {
+    console.log(memoryUpdatedBool, "useEffect");
+    if (memoryUpdatedBool) {
+      console.log("cam is going on a ride");
+      displayUpdateConfirmation();
+    }
+  }, [memoryUpdatedBool]);
 
   const createMemories = (memories) => {
     if (memories.length > 0) {
@@ -21,14 +54,19 @@ export default function Room(props) {
             style={memoryStyles[memory.id]}
             onPress={() => {
               setSelectedMemory(memory.id);
-            }}
-          >
+            }}>
             <Image
-            source={require("../../assets/thoughtBubble.png")}
-            style={{height: 150, width: 150}}
-          />
+              source={require("../../assets/thoughtBubble.png")}
+              style={{ height: 150, width: 150 }}
+            />
+            {memoryUpdatedBool && displayUpdateConfirmation()}
             {selectedMemory === memory.id && (
-              <Memory memory={memory} setSelectedMemory={setSelectedMemory} />
+              <Memory
+                memory={memory}
+                setSelectedMemory={setSelectedMemory}
+                memoryUpdatedBool={memoryUpdatedBool}
+                setMemoryUpdatedBool={setMemoryUpdatedBool}
+              />
             )}
           </TouchableOpacity>
         );
@@ -119,4 +157,4 @@ const stylesText = StyleSheet.create({
     borderRadius: 20,
   },
 });
-4
+4;
