@@ -40,13 +40,12 @@ export const editMemory = async (id, memoryData) => {
 };
 
 export const deleteMemory = async (id) => {
-  // const response = await fetch(
-  //   (`https://untangled-be.herokuapp.com/api/v1/memories/${id}/delete`,
-  //   {
-  //     method: "DELETE",
-  //   })
-  // );
+  const response = await fetch(
+    `https://untangled-be.herokuapp.com/api/v1/memories/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
 
-  // return await response.json();
-  console.log("Deleted this memory", id);
+  return await response.json();
 };

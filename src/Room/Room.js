@@ -37,9 +37,7 @@ export default function Room(props) {
   };
 
   useEffect(() => {
-    console.log(memoryUpdatedBool, "useEffect");
     if (memoryUpdatedBool) {
-      console.log("cam is going on a ride");
       displayUpdateConfirmation();
     }
   }, [memoryUpdatedBool]);

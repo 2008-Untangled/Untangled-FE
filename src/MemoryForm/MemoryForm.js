@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { editMemory, deleteMemory } from "../apiCalls";
 // import { TextInput } from 'react-native-paper';
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 // Edit is clicked from within a memory
 // Flip a bool in Memory when edit mode is activated and
@@ -37,7 +36,6 @@ export default MemoryForm = ({
 
   useEffect(() => {
     if (Object.keys(updatedMemory).length) {
-      console.log("if there is a new memory", updatedMemory);
       editMemory(memory.id, updatedMemory);
       setSelectedMemory(null);
       setModalVisible(!modalVisible);
@@ -47,7 +45,7 @@ export default MemoryForm = ({
   const displayDeleteConfirmation = () => {
     Alert.alert(
       "Delete This Memory?",
-      "Are you sure you want to delete this memory",
+      "Are you sure you want to delete this memory?",
       [
         {
           text: "NO",
@@ -57,7 +55,9 @@ export default MemoryForm = ({
         {
           text: "YES",
           onPress: () => {
-            deleteMemory(memory.id);
+            deleteMemory(memory.id)
+              .then((data) => console.log(data))
+              .catch((error) => console.log(error));
             setModalVisible(!modalVisible);
           },
         },
@@ -110,7 +110,7 @@ export default MemoryForm = ({
             onPress={() => {
               displayDeleteConfirmation();
             }}>
-            <Text>Delete Memory</Text>
+            <Text styles={styles.deleteButtonText}>Delete Memory</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -177,5 +177,10 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 5,
     borderRadius: 20,
+  },
+  deleteButtonText: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
