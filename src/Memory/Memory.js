@@ -9,35 +9,51 @@ import {
   Modal,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import MemoryForm from "../MemoryForm/MemoryForm";
 
-export default Memory = ({ memory, setSelectedMemory }) => {
+export default Memory = ({
+  memory,
+  setSelectedMemory,
+  memoryUpdatedBool,
+  setMemoryUpdatedBool,
+}) => {
   const [modalVisible, setModalVisible] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
   return (
-  <View >
-    <View style={styles.container}>
-      <Modal presentationStyle="pageSheet" visible={modalVisible}>
-        {editMode ? (
-          <MemoryForm editMode={editMode} setEditMode={setEditMode} setSelectedMemory={setSelectedMemory} setModalVisible={setModalVisible} modalVisible={modalVisible} memory={memory} />
+    <View>
+      <View style={styles.container}>
+        {/* {memoryUpdatedBool && displayUpdateConfirmation()} */}
+        <Modal presentationStyle='pageSheet' visible={modalVisible}>
+          {editMode ? (
+            <MemoryForm
+              editMode={editMode}
+              setEditMode={setEditMode}
+              setSelectedMemory={setSelectedMemory}
+              setModalVisible={setModalVisible}
+              modalVisible={modalVisible}
+              memory={memory}
+              memoryUpdatedBool={memoryUpdatedBool}
+              setMemoryUpdatedBool={setMemoryUpdatedBool}
+            />
           ) : (
             <View style={styles.modalView}>
               <Image
                 source={{ uri: `${memory.image}` }}
-                style={styles.memoryImage}
-                ></Image>
+                style={styles.memoryImage}></Image>
               <View style={styles.textContainer}>
-                <Text style={styles.textStyle}>Remember: {memory.description}</Text>
+                <Text style={styles.textStyle}>
+                  Remember: {memory.description}
+                </Text>
                 <Text style={styles.textStyle}>Aromas: {memory.aromas}</Text>
               </View>
               <TouchableOpacity
                 onPress={() => {
                   setModalVisible(!modalVisible);
                   setSelectedMemory(null);
-                }}
-                >
+                }}>
                 <Text style={styles.button} title={"Press Me"}>
                   GO BACK
                 </Text>
@@ -45,15 +61,14 @@ export default Memory = ({ memory, setSelectedMemory }) => {
               <TouchableOpacity
                 onPress={() => {
                   setEditMode(true);
-                }}
-                >
+                }}>
                 <Text style={styles.button}>Click HERE to edit</Text>
               </TouchableOpacity>
             </View>
-            )}
-      </Modal>
+          )}
+        </Modal>
+      </View>
     </View>
-  </View>
   );
 };
 

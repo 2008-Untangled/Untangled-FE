@@ -8,76 +8,115 @@ import {
   Modal,
   Button,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Alert,
 } from "react-native";
-import { editMemory } from "../apiCalls";
+import { editMemory, deleteMemory } from "../apiCalls";
 // import { TextInput } from 'react-native-paper';
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
 
 // Edit is clicked from within a memory
 // Flip a bool in Memory when edit mode is activated and
 // form will render instead of static memory
 
-
-export default MemoryForm = ({memory, setSelectedMemory, setModalVisible, modalVisible, setEditMode, editMode}) => {
-  const [updatedDescriptionText, setUpdatedDescriptionText] = useState(memory.description);
+export default MemoryForm = ({
+  memory,
+  setSelectedMemory,
+  setModalVisible,
+  modalVisible,
+  setEditMode,
+  editMode,
+  memoryUpdatedBool,
+  setMemoryUpdatedBool,
+}) => {
+  const [updatedDescriptionText, setUpdatedDescriptionText] = useState(
+    memory.description
+  );
   const [updatedAromaText, setUpdatedAromaText] = useState(memory.aromas);
   const [updatedMemory, setUpdatedMemory] = useState({});
-  // const [formVisible, setFormVisible] = useState(true);
-  
+
   useEffect(() => {
-    // console.log('updatedMemory :>> ', updatedMemory);
-    console.log('updatedDescriptionText :>> ', updatedDescriptionText);
-    console.log('updatedAromaText :>> ', updatedAromaText);
     if (Object.keys(updatedMemory).length) {
-      console.log('if there is a new memory', updatedMemory);
-      editMemory(memory.id, updatedMemory)
-      .then(response => console.log(response))
+      editMemory(memory.id, updatedMemory);
       setSelectedMemory(null);
       setModalVisible(!modalVisible);
     }
-  }, [updatedMemory])
+  }, [updatedMemory, modalVisible]);
+
+  const displayDeleteConfirmation = () => {
+    Alert.alert(
+      "Delete This Memory?",
+      "Are you sure you want to delete this memory?",
+      [
+        {
+          text: "NO",
+          onPress: () => console.warn("NO Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "YES",
+          onPress: () => {
+            deleteMemory(memory.id)
+              .then((data) => console.log(data))
+              .catch((error) => console.log(error));
+            setModalVisible(!modalVisible);
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={styles.formContainer}>
-      <Image source={{ uri: `${memory.image}` }} style={styles.memoryImage}></Image>
-      <Text style={{fontSize: 20}}>Description:</Text>
-      <TextInput 
+      <Image
+        source={{ uri: `${memory.image}` }}
+        style={styles.memoryImage}></Image>
+      <Text style={{ fontSize: 20 }}>Description:</Text>
+      <TextInput
         style={styles.inputField}
-        // multiline={true}
-        // mode={"outlined"}
-        // underlineColor="black"
         onChangeText={(text) => {
           setUpdatedDescriptionText(text);
-        // setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});
-        }
-      }>
+        }}>
         {memory.description}
       </TextInput>
-      <Text style={{fontSize: 20}}>Aromas:</Text>
-      <TextInput style={styles.inputField} onChangeText={(text) => {
-        setUpdatedAromaText(text);
-      }
-      } 
-        >
+      <Text style={{ fontSize: 20 }}>Aromas:</Text>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={(text) => {
+          setUpdatedAromaText(text);
+        }}>
         {memory.aromas}
       </TextInput>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={()=> {
-          setUpdatedMemory({description: updatedDescriptionText, aromas: updatedAromaText});          
-        }} > 
-          <Text style={styles.button}>SUBMIT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=> {
-          setEditMode(!editMode);
-        }} >
-          <Text style={styles.button}>BACK TO MEMORY</Text>
-        </TouchableOpacity>
+      <View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setUpdatedMemory({
+                description: updatedDescriptionText,
+                aromas: updatedAromaText,
+              });
+            }}>
+            <Text style={styles.button}>SUBMIT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setEditMode(!editMode);
+            }}>
+            <Text style={styles.button}>BACK TO MEMORY</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => {
+              displayDeleteConfirmation();
+            }}>
+            <Text styles={styles.deleteButtonText}>Delete Memory</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>       
-  )
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -103,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     borderWidth: 5,
     flexShrink: 1,
-    backgroundColor: "#D3D3D3"
+    backgroundColor: "#D3D3D3",
   },
   buttonContainer: {
     display: "flex",
@@ -127,5 +166,21 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 400,
     height: 400,
+  },
+  deleteButton: {
+    textAlign: "center",
+    margin: 5,
+    padding: 5,
+    fontSize: 50,
+    fontWeight: "bold",
+    backgroundColor: "red",
+    borderColor: "black",
+    borderWidth: 5,
+    borderRadius: 20,
+  },
+  deleteButtonText: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
