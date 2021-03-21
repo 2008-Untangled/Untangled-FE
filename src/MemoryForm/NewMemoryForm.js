@@ -12,19 +12,20 @@ import {
   Alert,
 } from "react-native";
 
-export default NewMemoryForm = ({createdMemory}) => {
-  return(
+export default NewMemoryForm = ({ createdMemory }) => {
+  return (
     <View style={styles.formContainer}>
-      <TextInput style={styles.inputField}>
-      </TextInput>
-      <TextInput style={styles.inputField}>
-      </TextInput>
-      <TextInput style={styles.inputField}>
-      </TextInput>
-      <TouchableOpacity onPress={() => Alert.alert('You posted a new memory!')}></TouchableOpacity>
+      
+      <TextInput style={styles.inputField}></TextInput>
+      <TextInput style={styles.inputField}></TextInput>
+      <TextInput style={styles.inputField}></TextInput>
+      <TouchableOpacity
+        onPress={() =>
+          Alert.alert("You posted a new memory!")
+        }></TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -34,9 +35,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "space-between",
     alignItems: "center",
+    position: "absolute",
     zIndex: 8,
     borderColor: "red",
     fontSize: 20,
+    width: 500,
+    height: 500,
   },
   inputField: {
     marginTop: 3,

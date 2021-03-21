@@ -20,6 +20,7 @@ export default function Room(props) {
   const [selectedMemory, setSelectedMemory] = useState(null);
   const [memoryUpdatedBool, setMemoryUpdatedBool] = useState(false);
   const [memoryMode, setMemoryMode] = useState(false);
+  const [coordinatesSelected, setCoordinatesSelected] = useState(false);
   const [createdMemory, setCreatedMemory] = useState({
     description: "",
     image: "",
@@ -61,8 +62,7 @@ export default function Room(props) {
             style={memoryStyles[memory.id]}
             onPress={() => {
               setSelectedMemory(memory.id);
-            }}
-          >
+            }}>
             <Image
               source={require("../../assets/thoughtBubble.png")}
               style={{ height: 150, width: 150 }}
@@ -149,54 +149,87 @@ export default function Room(props) {
 
   const memoryStyles = StyleSheet.create(createMemoryStyles());
 
+  const logCoordinates = (event) => {
+    if (memoryMode)
+      console.log(event.nativeEvent.locationX, event.nativeEvent.locationY);
+  };
+
   return (
     <TouchableOpacity
-      style={styles.container}
-      activeOpacity={1} 
+      // style={{
+      //   width: 1000,
+      //   height: 1000,
+      //   backgroundColor: "black",
+      //   position: "absolute",
+      //   border: 4,
+      //   borderColor: "magenta",
+      //   borderStyle: "solid",
+      //   zIndex: 17,
+      // }}
       onPress={(event) => {
         if (memoryMode) {
-          setCreatedMemory({...createdMemory, x: event.nativeEvent.locationX, y: event.nativeEvent.locationY })
+          setCreatedMemory({
+            ...createdMemory,
+            x: event.nativeEvent.locationX,
+            y: event.nativeEvent.locationY,
+          });
+          setCoordinatesSelected(true);
           // setMemoryMode(false)
           // return <NewMemoryForm createdMemory={createdMemory}/>
+
+          logCoordinates(event);
         }
-    }} 
-      >
-      {memoryMode && <NewMemoryForm createdMemory={createdMemory}/>}
+      }}>
+      {coordinatesSelected && (
+        <NewMemoryForm
+          style={{ zIndex: 11, position: "absolute" }}
+          createdMemory={createdMemory}
+        />
+      )}
+      {/* <View style={styles.container}> */}
       <View style={stylesText.topContainer}>
         <Text style={stylesText.textStyle}>TAP CIRCLES TO VIEW MEMORIES</Text>
         <TouchableOpacity
           onPress={(event) => {
             setMemoryMode(true);
             createMemory(event);
-            
-          }}
-        >
+          }}>
           <Image
             source={require("../../assets/plus.png")}
             style={{ width: 64, height: 64, top: 170 }}
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={(event) => {
-          event.preventDefault()
-        }}
-      >
+          event.preventDefault();
+        }}>
         <Image
           source={{ uri: `${room.image}` }}
           style={{ width: 820, height: 1180 }}
         />
       </TouchableOpacity>
       {memories && createMemories(memories)}
+      {/* </View> */}
     </TouchableOpacity>
   );
 }
 
 const stylesText = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    zIndex: 10,
+    position: "absolute",
+    margin: 20,
+    width: 820,
+    height: 1180,
+  },
   topContainer: {
     display: "flex",
     flexDirection: "row",
     zIndex: 10,
+    // position: "absolute",
     margin: 20,
   },
   textStyle: {
