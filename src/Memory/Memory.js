@@ -16,8 +16,8 @@ import MemoryForm from "../MemoryForm/MemoryForm";
 export default Memory = ({
   memory,
   setSelectedMemory,
-  memoryUpdatedBool,
-  setMemoryUpdatedBool,
+  // memoryUpdatedBool,
+  // setMemoryUpdatedBool,
 }) => {
   const [modalVisible, setModalVisible] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -35,8 +35,8 @@ export default Memory = ({
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
               memory={memory}
-              memoryUpdatedBool={memoryUpdatedBool}
-              setMemoryUpdatedBool={setMemoryUpdatedBool}
+              // memoryUpdatedBool={memoryUpdatedBool}
+              // setMemoryUpdatedBool={setMemoryUpdatedBool}
             />
           ) : (
             <View style={styles.modalView}>

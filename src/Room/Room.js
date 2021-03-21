@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { getRoom, getMemories } from "../apiCalls";
 import Memory from "../Memory/Memory";
+import NewMemoryForm from "../MemoryForm/NewMemoryForm";
 import MemoryForm from "../MemoryForm/MemoryForm";
 
 export default function Room(props) {
@@ -149,13 +150,25 @@ export default function Room(props) {
   const memoryStyles = StyleSheet.create(createMemoryStyles());
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={1} 
+      onPress={(event) => {
+        if (memoryMode) {
+          setCreatedMemory({...createdMemory, x: event.nativeEvent.locationX, y: event.nativeEvent.locationY })
+          // setMemoryMode(false)
+          // return <NewMemoryForm createdMemory={createdMemory}/>
+        }
+    }} 
+      >
+      {memoryMode && <NewMemoryForm createdMemory={createdMemory}/>}
       <View style={stylesText.topContainer}>
         <Text style={stylesText.textStyle}>TAP CIRCLES TO VIEW MEMORIES</Text>
         <TouchableOpacity
           onPress={(event) => {
             setMemoryMode(true);
             createMemory(event);
+            
           }}
         >
           <Image
@@ -167,10 +180,6 @@ export default function Room(props) {
       <TouchableOpacity 
         onPress={(event) => {
           event.preventDefault()
-          if(memoryMode) {
-            setCreatedMemory({...createdMemory, x: event.nativeEvent.locationX, y: event.nativeEvent.locationY })
-            setMemoryMode(false)
-          }
         }}
       >
         <Image
@@ -179,7 +188,7 @@ export default function Room(props) {
         />
       </TouchableOpacity>
       {memories && createMemories(memories)}
-    </View>
+    </TouchableOpacity>
   );
 }
 

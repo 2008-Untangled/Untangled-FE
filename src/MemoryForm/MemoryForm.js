@@ -25,8 +25,6 @@ export default MemoryForm = ({
   modalVisible,
   setEditMode,
   editMode,
-  memoryUpdatedBool,
-  setMemoryUpdatedBool,
 }) => {
   const [updatedDescriptionText, setUpdatedDescriptionText] = useState(
     memory.description
