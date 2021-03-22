@@ -95,8 +95,8 @@ export default function Room(props) {
             // borderRadius: 75,
             // borderWidth: 4,
             // borderColor: "red",
-            top: memory.y - 50,
-            left: memory.x - 75,
+            top: memory.y + 50,
+            left: memory.x,
             width: 150,
             height: 150,
           };
@@ -148,7 +148,6 @@ export default function Room(props) {
   });
 
   const memoryStyles = StyleSheet.create(createMemoryStyles());
-
 
   return (
     <View
