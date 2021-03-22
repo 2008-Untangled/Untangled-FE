@@ -50,22 +50,23 @@ export const deleteMemory = async (id) => {
   return await response.json();
 };
 
-export const postMemory = async (id, memory) => {
-  const repsonse = await fetch(
-    `https://untangled-be.herokuapp.com/api/v1/rooms/${id}/memories/`, {
-      method: 'POST',
+export const postMemory = async (roomId, memory) => {
+  const response = await fetch(
+    `https://untangled-be.herokuapp.com/api/v1/rooms/${roomId}/memories`,
+    {
+      method: "POST",
       body: JSON.stringify({
-        // image: {memory.image},
-        description: '',
-        song: '',
-        aromas: '',
-        x: '',
-        y: ''
+        image: "some image",
+        description: memory.description,
+        song: "song",
+        aromas: memory.aromas,
+        x: memory.x,
+        y: memory.y,
       }),
       headers: {
-        'Content-Type': 'aaplication/json'
-      }
+        "Content-Type": "application/json",
+      },
     }
-
-  )
-}
+  );
+  return await response.json();
+};

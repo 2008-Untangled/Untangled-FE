@@ -149,41 +149,42 @@ export default function Room(props) {
 
   const memoryStyles = StyleSheet.create(createMemoryStyles());
 
-  const logCoordinates = (event) => {
-    if (memoryMode)
-      console.log(event.nativeEvent.locationX, event.nativeEvent.locationY);
-  };
 
   return (
-    <TouchableOpacity
-      // style={{
-      //   width: 1000,
-      //   height: 1000,
-      //   backgroundColor: "black",
-      //   position: "absolute",
-      //   border: 4,
-      //   borderColor: "magenta",
-      //   borderStyle: "solid",
-      //   zIndex: 17,
-      // }}
-      onPress={(event) => {
-        if (memoryMode) {
-          setCreatedMemory({
-            ...createdMemory,
-            x: event.nativeEvent.locationX,
-            y: event.nativeEvent.locationY,
-          });
-          setCoordinatesSelected(true);
-          // setMemoryMode(false)
-          // return <NewMemoryForm createdMemory={createdMemory}/>
+    <View
+    // style={{
+    //   width: 1000,
+    //   height: 1000,
+    //   backgroundColor: "black",
+    //   position: "absolute",
+    //   border: 4,
+    //   borderColor: "magenta",
+    //   borderStyle: "solid",
+    //   zIndex: 17,
+    // }}
+    // onPress={(event) => {
+    // if (memoryMode) {
+    //   setCreatedMemory({
+    //     ...createdMemory,
+    //     x: event.nativeEvent.locationX,
+    //     y: event.nativeEvent.locationY,
+    //   });
+    //   setCoordinatesSelected(true);
+    //   // setMemoryMode(false)
+    //   // return <NewMemoryForm createdMemory={createdMemory}/>
 
-          logCoordinates(event);
-        }
-      }}>
+    // logCoordinates(event);
+    // }
+    >
       {coordinatesSelected && (
         <NewMemoryForm
-          style={{ zIndex: 11, position: "absolute" }}
+          // style={{ zIndex: 11, position: "absolute" }}
+          room={room}
           createdMemory={createdMemory}
+          setCreatedMemory={setCreatedMemory}
+          memoryMode={memoryMode}
+          setMemoryMode={setMemoryMode}
+          setCoordinatesSelected={setCoordinatesSelected}
         />
       )}
       {/* <View style={styles.container}> */}
@@ -202,7 +203,14 @@ export default function Room(props) {
       </View>
       <TouchableOpacity
         onPress={(event) => {
-          event.preventDefault();
+          if (memoryMode) {
+            setCoordinatesSelected(true);
+            setCreatedMemory({
+              ...createdMemory,
+              x: event.nativeEvent.locationX,
+              y: event.nativeEvent.locationY,
+            });
+          }
         }}>
         <Image
           source={{ uri: `${room.image}` }}
@@ -211,7 +219,7 @@ export default function Room(props) {
       </TouchableOpacity>
       {memories && createMemories(memories)}
       {/* </View> */}
-    </TouchableOpacity>
+    </View>
   );
 }
 

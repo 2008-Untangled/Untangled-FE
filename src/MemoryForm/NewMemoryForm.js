@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, component } from "react";
 import { useEffect } from "react";
 import {
   StyleSheet,
@@ -11,18 +11,87 @@ import {
   TextInput,
   Alert,
 } from "react-native";
+import { postMemory } from "../apiCalls";
 
-export default NewMemoryForm = ({ createdMemory }) => {
+export default NewMemoryForm = ({
+  room,
+  createdMemory,
+  setCreatedMemory,
+  memoryMode,
+  setMemoryMode,
+  setCoordinatesSelected,
+}) => {
+  // return (
+  //   <View style={styles.formContainer}>
+  //     <Image
+  //       style={styles.memoryImage}
+  //       source={require("../../assets/icon.png")}></Image>
+  //     <TextInput style={styles.inputField}></TextInput>
+  //     <TextInput style={styles.inputField}></TextInput>
+  //     <TextInput style={styles.inputField}></TextInput>
+  //     <TouchableOpacity
+  //       style={styles.button}
+  //       onPress={() =>
+  //         Alert.alert("You posted a new memory!")
+  //       }></TouchableOpacity>
+  //   </View>
+  // );
   return (
     <View style={styles.formContainer}>
-      
-      <TextInput style={styles.inputField}></TextInput>
-      <TextInput style={styles.inputField}></TextInput>
-      <TextInput style={styles.inputField}></TextInput>
-      <TouchableOpacity
-        onPress={() =>
-          Alert.alert("You posted a new memory!")
-        }></TouchableOpacity>
+      <Image
+        // source={{ uri: `${memory.image}` }}
+        style={styles.memoryImage}></Image>
+      <Text style={{ fontSize: 20 }}>Description:</Text>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={(text) => {
+          setCreatedMemory({ ...createdMemory, description: text });
+        }}>
+        {createdMemory.description}
+      </TextInput>
+      <Text style={{ fontSize: 20 }}>Aromas:</Text>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={(text) => {
+          setCreatedMemory({ ...createdMemory, aromas: text });
+        }}>
+        {createdMemory.aromas}
+      </TextInput>
+      <View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              // setUpdatedMemory({
+              //   description: updatedDescriptionText,
+              //   aromas: updatedAromaText,
+              // });
+              Alert.alert("the memory has been posted");
+              setCoordinatesSelected(false);
+              console.log(createdMemory, room.id);
+              postMemory(room.id, createdMemory).then((data) =>
+                console.log(data)
+              );
+            }}>
+            <Text style={styles.button}>SUBMIT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setMemoryMode(false);
+              setCoordinatesSelected(false);
+            }}>
+            <Text style={styles.button}>CLOSE</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          {/* <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => {
+              displayDeleteConfirmation();
+            }}>
+            <Text styles={styles.deleteButtonText}>Delete Memory</Text>
+          </TouchableOpacity> */}
+        </View>
+      </View>
     </View>
   );
 };
@@ -30,7 +99,10 @@ export default NewMemoryForm = ({ createdMemory }) => {
 const styles = StyleSheet.create({
   formContainer: {
     display: "flex",
+    backgroundColor: "grey",
     flex: 1,
+    top: 300,
+    left: 200,
     flexDirection: "column",
     justifyContent: "center",
     alignContent: "space-between",
@@ -71,13 +143,15 @@ const styles = StyleSheet.create({
     borderColor: "#e1a555",
     borderWidth: 5,
     borderRadius: 20,
+    width: 300,
+    height: 100,
   },
   memoryImage: {
     zIndex: 1,
     marginTop: 3,
     borderRadius: 20,
-    width: 400,
-    height: 400,
+    width: 20,
+    height: 20,
   },
   deleteButton: {
     textAlign: "center",
